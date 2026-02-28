@@ -1,0 +1,418 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Website</title>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <input type="checkbox" name=" " id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
+        
+        <a href="#" class="logo">Flower<span>.</span></a>
+
+        <nav class="navbar">
+            <a href="#home">home</a>
+            <a href="#about">about</a>
+            <a href="#product">product</a>
+            <a href="#review">review</a>
+            <a href="#contact">contact</a>
+        </nav>
+
+        <div class="icons">
+            <a href="#"><i class="fas fa-heart"></i></a>
+            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="#"><i class="fas fa-user"></i></a>
+        </div>
+    </header>
+
+    <section class="home" id="home">
+        <div class="content">
+            <h1> fresh flowers</h1>
+            <span> natural & beautiful flower </span>
+            <p> Flowers are nature’s most enchanting creations, symbolizing beauty, love, and renewal. With their vibrant colors, delicate petals, and captivating fragrance, they inspire emotions, attract  pollinators, and sustain life. Each bloom tells a story of grace, growth, and the wonders of nature.</p>
+            <a href="#" class="btn">shop now</a>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h1 class ="heading"> <span> about</span> us</h1>
+    
+        <div class="row">
+            <div class="video-container">
+                <video src="{% static 'main/video.mp4' %}" loop autoplay muted width="100%"></video>
+                <h3>best flower sellers</h3>
+            </div>
+            <div class="content">
+                <h3>why choose us?</h3>
+                <p>Flowers are beautiful gifts from nature. Their bright colors, soft petals, and sweet smell make people feel happy and calm. Flowers remind us of love, kindness, and the simple beauty of life. 🌸</p>
+                <p>Every flower is a silent poem of nature.”
+                    "We don’t sell flowers, we deliver smiles."
+                    "Fresh blooms, fresh beginnings."
+                    "Because every moment deserves to bloom beautifully."
+                    "Happiness is handmade — and wrapped in petals."</p>
+                <a href="#" class="btn"> learn more</a>
+            </div>
+        </div>
+    </section>
+
+    <section class ="icons-container">
+        <div class="icons">
+            <img src="{% static 'main/image1.webp' %}" alt=" " class="icons1">
+            <div class="info">
+                <h6> free delivery</h6>
+                <p> on all delivery</p>
+            </div>
+        </div>
+
+        <div class="icons">
+            <img src="{% static 'main/image2.jpg' %}" alt=" " class="icons2">
+            <div class="info">
+                <h6>10 day returns </h6>
+                <p> moneyback Gurenteed</p>
+            </div>
+        </div>
+
+        <div class="icons">
+            <img src="{% static 'main/gift.png' %}" alt=" " class="icons3">
+            <div class="info">
+                <h6> offer & gifts</h6>
+                <p> on all order</p>
+            </div>
+        </div>
+
+        <div class="icons">
+            <img src="{% static 'main/image4.webp' %}" alt=" " class="icons4">
+            <div class="info">
+                <h6> secure payments</h6>
+                <p>protected by paypal</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+            <a href="{% url 'add_product' %}" class="btn" style="margin-top: 0;">Add Product</a>
+            <h1 class="heading" style="margin-bottom: 0;"> latest <span> products</span></h1>
+            <div style="width: 150px;"></div>
+        </div>
+
+        <div class="box-container">
+            {% for product in products %}
+            <div class="box">
+                {% if product.discount %}
+                <span class="discount">{{ product.discount }}</span>
+                {% endif %}
+                <div class="image">
+                    <img src="{{ product.image.url }}" alt=" ">
+                    <div class="icons">
+                        <a href="#" class="fas fa-heart"> </a>
+                        <a href="#" class="cart-btn">add to cart</a>
+                        <a href="#" class="fas fa-share"></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>{{ product.name }}</h3>
+                    <div class="price">
+                        ${{ product.price }}
+                        {% if product.old_price %}<span>${{ product.old_price }}</span>{% endif %}
+                        <a href="{% url 'delete_product' product.pk %}" class="fas fa-trash" style="color: red; margin-left: 10px; font-size: 1.5rem;" onclick="return confirm('Are you sure you want to delete this product?');"></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- Static Products -->
+            <div class="box">
+                <span class="discount">-10%</span>
+                <div class="image">
+                    <img src="{% static 'main/images5.jpg' %}" alt=" " >
+                    <div class="icons">
+                        <a href="#" class="fas fa-heart"> </a>
+                        <a href="#" class="cart-btn">add to cart</a>
+                        <a href="#" class="fas fa-share"></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>flower pot</h3>
+                    <div class="price"> $12.99<span>$18.99</span></div>
+                </div>
+            </div>
+
+            <div class="box">
+                <span class="discount">-15%</span>
+                <div class="image">
+                    <img src="{% static 'main/flower2.webp' %}" alt=" ">
+                    <div class="icons">
+                        <a href="#" class="fas fa-heart"></a>
+                        <a href="#" class="cart-btn">add to cart</a>
+                        <a href="#"  class="fas fa-share"></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>flower pot</h3>
+                    <div class="price"> $12.99<span>$15.99</span></div>
+                </div>
+            </div>
+
+            <div class="box">
+                <span class=" discount">-12%</span>
+                <div class="image">
+                    <img src="{% static 'main/image3.jpg' %}" alt=" ">
+                    <div class="icons">
+                        <a href="#" class="fas fa-heart"></a>
+                        <a href="#" class="cart-btn">add to cart</a>
+                        <a href="#" class="fas fa-share"></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>flower pot</h3>
+                    <div class="price"> $12.99<span>$15.99</span></div>
+                </div>
+            </div>
+
+            <div class="box">
+                <span class=" discount">-10%</span>
+                <div class="image">
+                    <img src="{% static 'main/images4.jpg' %}" alt=" ">
+                    <div class="icons">
+                        <a href="#" class="fas fa-heart"></a>
+                        <a href="#" class="cart-btn">add to cart</a>
+                        <a href="#" class="fas fa-share"></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>flower pot</h3>
+                    <div class="price"> $12.99<span>$15.99</span> </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <span class=" discount">-15%</span>
+                <div class="image">
+                    <img src="{% static 'main/flower12.jpg' %}" alt=" ">
+                    <div class="icons">
+                        <a href="#" class="fas fa-heart"></a>
+                        <a href="#" class="cart-btn">add to cart</a>
+                        <a href="#" class="fas fa-share"></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>flower pot</h3>
+                    <div class="price"> $12.99<span>$15.99</span></div>
+                </div>
+            </div>
+
+            <div class="box">
+                <span class=" discount">-10%</span>
+                <div class="image">
+                    <img src="{% static 'main/images6.jpg' %}" alt=" ">
+                    <div class="icons">
+                        <a href="#" class="fas fa-heart"></a>
+                        <a href="#" class="cart-btn">add to cart</a>
+                        <a href="#" class="fas fa-share"></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h3>flower pot</h3>
+                    <div class="price"> $12.99<span>$15.99</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="review" id="review">
+        <h1 class="heading"> customer's <span>review</span></h1>
+        <div class="box-container">
+            <div class="box">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p> Flowers are nature’s most enchanting creations, symbolizing beauty, love, and renewal. With their vibrant colors, delicate petals, and captivating fragrance, they inspire emotions, attract  pollinators, and sustain life. Each bloom tells a story of grace, growth, and the wonders of nature. </p>
+                <div class="user">
+                    <img src="{% static 'main/face.png' %}" alt="  ">
+                    <div class="user-info">
+                        <h3>Rahul Maurya</h3>
+                        <span>happy customer</span>
+                    </div>
+                </div>
+                <span class="fas fa-quote-right"></span>
+            </div>
+            <div class="box">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p> Flowers are one of the most beautiful gifts of nature. They add color and freshness to the world and make places look happy and peaceful. When flowers bloom in gardens, parks, or homes, they bring a feeling of joy and calmness. Their beauty attracts people of all ages.</p>
+                <div class="user">
+                    <img src="{% static 'main/face1.avif' %}" alt="  ">
+                    <div class=" user-info">
+                        <h3>jonsi deo</h3>
+                        <span>happy customer</span>
+                    </div>
+                </div>
+                <span class="fas fa-quote-right"></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h1 class="heading"> <span> contact</span> us</h1>
+        <div class="row">
+            
+            <form id="contactForm">
+                <input type="text" name="name" placeholder="Your Name" class="box" required>
+                <input type="email" name="email" placeholder="Your Email" class="box" required>
+                <input type="number" name="phone" placeholder="Phone Number" class="box" required>
+                <textarea name="message" class="box" placeholder="Your Message" cols="30" rows="10" required></textarea>
+                <button type="submit" class="btn" id="submitBtn">
+                    <span id="btnText">Send Message</span>
+                    <span id="btnSpinner" style="display: none;">
+                        <i class="fas fa-spinner loading-spinner"></i> Sending...
+                    </span>
+                </button>
+                <div id="formMessage"></div>
+            </form>
+            
+            <!-- <div class="image">
+                <img src="{% static 'main/static/main/banner1.png' %}" alt=" ">
+            </div> -->
+            <div class="image">
+                <img src="{% static 'main/banner1.png' %}" alt=" ">
+            </div>
+        </div>
+    </section>
+
+ <section class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#home">home</a>
+            <a href="#about">about</a>
+            <a href="#products">products</a>
+            <a href="#review">review</a>
+            <a href="#contact">contact</a>
+        </div>
+
+        <div class="box">
+            <h3>extra links</h3>
+            <a href="#">my account</a>
+            <a href="#">my order</a>
+            <a href="#">my favorite</a>
+        </div>
+
+        <div class="box">
+            <h3>Location</h3>
+            <a href="#">India</a>
+            <a href="#">USA</a>
+            <a href="#">japan</a>
+            <a href="#">France</a>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="tel:+8591321799">+859-132-1799</a>
+            <a href="mailto:manishkushwaha8591@gmail.com">manishkushwaha8591@gmail.com</a>
+            <a href="#">mumbai, india - 400097</a>
+            <img src="{% static 'main/payment.png' %}" alt="payment methods">
+        </div>
+    </div>
+    <div class="credit">created by <span>Mr. Manish Kushwaha</span> | all rights reserved</div>
+</section>
+
+    <script>
+        // ===== CONFIGURATION =====
+        // ⚠️ REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT URL
+        // Get this from: Google Apps Script → Deploy → New deployment → Web app
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoTk0apLEx7XL9D_-cfzX_ne_nI8PuUHRYm7uBmVq3-1OQET0c4XWAJO63yBERJjqn/exec';
+        
+        // ===== DOM ELEMENTS =====
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnSpinner = document.getElementById('btnSpinner');
+        const formMessage = document.getElementById('formMessage');
+                // ===== INITIAL CHECK =====
+        if (SCRIPT_URL.includes('YOUR_GOOGLE_APPS_SCRIPT_URL_HERE')) {
+            showFormMessage('⚠️ Setup Required: Please add your Google Apps Script URL in the JavaScript code', 'info');
+            submitBtn.disabled = true;
+        }
+        
+        // ===== FORM SUBMISSION =====
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Disable form and show loading
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'inline';
+            
+            // Hide previous messages
+            formMessage.style.display = 'none';
+            
+            try {
+                // Collect form data
+                const formData = new FormData(contactForm);
+                
+                // Send to Google Apps Script
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                // Get the response
+                const result = await response.json();
+                console.log('Server response:', result);
+                
+                if (result.success) {
+                    // Success
+                    showFormMessage('✅ Thank you! Your message has been sent successfully. We will contact you soon.', 'success');
+                    
+                    // Reset form after 2 seconds
+                    setTimeout(() => {
+                        contactForm.reset();
+                    }, 2000);
+                    
+                } else {
+                    // Error from script
+                    showFormMessage('❌ Error: ' + result.error, 'error');
+                }
+                
+            } catch (error) {
+                // Network error
+                console.error('Submission error:', error);
+                showFormMessage('❌ Network error. Please check your connection and try again.', 'error');
+            } finally {
+                // Re-enable form
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnSpinner.style.display = 'none';
+                
+                // Auto-hide messages after 8 seconds
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 8000);
+            }
+        });
+        
+        // ===== HELPER FUNCTIONS =====
+        function showFormMessage(message, type) {
+            formMessage.textContent = message;
+            formMessage.className = type;
+            formMessage.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
