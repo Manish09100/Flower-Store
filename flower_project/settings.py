@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-ap2!r31pl&#vaw&@86h)l$o*e4(0km@yc4ap7oa3tuj3yn=24f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost 127.0.0.1 flower-store-1uo2.onrender.com').split()
-
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost 127.0.0.1 flower-store-lu02.onrender.com').split()
 # Application definition
 
 INSTALLED_APPS = [
@@ -124,5 +123,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 
